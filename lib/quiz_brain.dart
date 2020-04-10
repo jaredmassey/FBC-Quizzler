@@ -1,5 +1,6 @@
 import 'question.dart';
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class QuizBrain {
   int currentQuestion = 0;
@@ -42,11 +43,19 @@ class QuizBrain {
         true),
   ];
 
+  bool quizDone() => currentQuestion == _questions.length;
+
   String getCurrentText() {
     return _questions[currentQuestion].questionText;
   }
 
-  void handleResponse(bool response) {
+  void resetQuiz() {
+    currentScore = 0;
+    currentQuestion = 0;
+    scoreKeeper.clear();
+  }
+
+  void handleResponse(BuildContext context, bool response) {
     // Find out if answer was right
     bool result = _questions[currentQuestion].checkAnswer(response);
 
@@ -59,8 +68,24 @@ class QuizBrain {
 
     // Increment question
     currentQuestion++;
-    if (currentQuestion == _questions.length) {
-      //TODO Finish Quiz
+    if (quizDone()) {
+      Alert(
+        context: context,
+        type: AlertType.none,
+        title: 'Quiz Over',
+        desc: 'Final Score: $currentScore',
+        buttons: [
+          DialogButton(
+            child: Text(
+              'Reset Quiz',
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: () => Navigator.pop(context),
+            width: 200,
+          )
+        ],
+      ).show();
+      resetQuiz();
     }
   }
 }

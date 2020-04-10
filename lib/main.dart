@@ -65,7 +65,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  quizBrain.handleResponse(true);
+                  quizBrain.handleResponse(context, true);
                 });
               },
             ),
@@ -85,7 +85,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  quizBrain.handleResponse(false);
+                  quizBrain.handleResponse(context, false);
                 });
               },
             ),
