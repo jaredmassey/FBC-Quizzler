@@ -40,7 +40,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.getCurrentQuestionText(),
+                quizBrain.getCurrentText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
